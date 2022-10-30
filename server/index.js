@@ -40,6 +40,6 @@ app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/users", require("./routes/users.routes"));
 app.use("/api/posts", require("./routes/posts.routes"));
 
-app.listen(8800, () => {
+app.listen(4400, () => {
   console.log("Backend server is running!");
 });
