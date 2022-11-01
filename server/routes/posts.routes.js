@@ -7,6 +7,8 @@ router.post("/submit", PostController.submitPost);
 router.put("/update/:id", PostController.updatePost);
 // Delete a Post
 router.delete("/delete/:id", PostController.deletePost);
+// Get post timeline
+router.get("/timeline/:userId", PostController.getTimeline);
 // Get all posts
 router.get("/get_all", PostController.getAll);
 // Get all user's posts
