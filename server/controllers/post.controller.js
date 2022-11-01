@@ -1,7 +1,7 @@
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
 
-// CREATE A POST
+// Create a Post
 exports.submitPost = async (req, res) => {
   try {
     let commonPostInfo = {
@@ -42,7 +42,7 @@ exports.submitPost = async (req, res) => {
   }
 };
 
-// UPDATE A POST
+// Update a Post
 exports.updatePost = async (req, res) => {
   try {
     let post = await Post.findById(req.params.id);
@@ -64,7 +64,7 @@ exports.updatePost = async (req, res) => {
   }
 };
 
-// DELETE A POST
+// Delete a Post
 exports.deletePost = async (req, res) => {
   try {
     let post = await Post.findById(req.params.id);
@@ -85,7 +85,7 @@ exports.deletePost = async (req, res) => {
   }
 };
 
-// GET A POST
+// Get a Post
 exports.getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -126,6 +126,28 @@ exports.getAll = async (req, res) => {
       success: true,
       posts: [...posts],
       totalPages: totalPages,
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: true,
+      message: err.message,
+    });
+  }
+};
+
+// get timeline posts
+exports.getTimeline = async (req, res) => {
+  try {
+    let currentUser = await User.findById(req.params.userId);
+    const userPosts = await Post.find({ userId: currentUser._id });
+    const friendPosts = await Promise.all(
+      currentUser.followings.map((friendId) => {
+        return Post.find({ userId: friendId });
+      })
+    );
+    res.status(200).json({
+      success: true,
+      posts: userPosts.concat(...friendPosts),
     });
   } catch (err) {
     res.status(500).json({
