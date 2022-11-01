@@ -1,11 +1,10 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { InfoContext } from "../../utils/InfoProvider";
-import Feed from "./components/Feed";
+import { InfoContext } from "../utility/InfoProvider";
 
 export default function Home() {
-  const { authorized } = useContext(InfoContext);
+  // const { authorized } = useContext(InfoContext);
 
   return (
     <main>
@@ -47,12 +46,7 @@ export default function Home() {
             >
               Find a Post
             </Button>
-            <Button
-              component={Link}
-              to={authorized ? "/post/create" : "/register"}
-              variant="outlined"
-              color="primary"
-            >
+            <Button component={Link} variant="outlined" color="primary">
               Create a Post
             </Button>
           </Stack>
