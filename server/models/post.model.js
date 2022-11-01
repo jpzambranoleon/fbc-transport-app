@@ -7,11 +7,6 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    title: {
-      type: String,
-      required: true,
-      max: 100,
-    },
     desc: {
       type: String,
       max: 500,
