@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import axios from "axios";
 import { useContext } from "react";
 import {
@@ -25,9 +25,18 @@ function App() {
         {authorized ? (
           <Router>
             <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-            </Routes>
+            <Container>
+              <Grid container spacing={3}>
+                <Grid item sm={4}>
+                  <Leftbar />
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                  </Routes>
+                </Grid>
+              </Grid>
+            </Container>
           </Router>
         ) : (
           <Router>
