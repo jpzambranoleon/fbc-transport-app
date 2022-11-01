@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import { ChatBubbleOutline, HomeOutlined } from "@mui/icons-material";
 
 const Navbar = () => {
   const { authorized } = useContext(InfoContext);
@@ -38,21 +39,27 @@ const Navbar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+      <AppBar position="static" sx={{ bgcolor: "background.default" }}>
+        <Toolbar
+          sx={{
+            width: { xl: "75%", lg: "90%" },
+            margin: { xl: "0 auto", lg: "0 auto" },
+          }}
+        >
+          <Typography
+            variant="h6"
+            component="h1"
+            color="primary"
+            sx={{ flexGrow: 1 }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            IFO Transport App
           </Typography>
-          <Button color="inherit">Login</Button>
+          <IconButton size="large">
+            <HomeOutlined color="primary" />
+          </IconButton>
+          <IconButton size="large">
+            <ChatBubbleOutline color="primary" />
+          </IconButton>
           <IconButton>
             {loading ? (
               <Skeleton variant="circular" width={35} height={35} />
