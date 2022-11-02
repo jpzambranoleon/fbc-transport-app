@@ -8,7 +8,6 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import { useContext } from "react";
 import { InfoContext } from "../utility/InfoProvider";
 import { useState } from "react";
