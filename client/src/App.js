@@ -11,6 +11,8 @@ import Leftbar from "./components/Leftbar";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import ProfileEdit from "./pages/ProfileEdit";
 import Register from "./pages/Register";
 import { InfoContext } from "./utility/InfoProvider";
 
@@ -30,9 +32,11 @@ function App() {
                 <Grid item sm={4}>
                   <Leftbar />
                 </Grid>
-                <Grid item sm={6} xs={12}>
+                <Grid item sm={8} xs={12}>
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile/edit" element={<ProfileEdit />} />
                   </Routes>
                 </Grid>
               </Grid>
