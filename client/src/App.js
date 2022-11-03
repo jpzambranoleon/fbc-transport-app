@@ -1,4 +1,5 @@
 import { Box, Container, Grid } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import axios from "axios";
 import { useContext } from "react";
 import {
@@ -11,6 +12,7 @@ import Leftbar from "./components/Leftbar";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Messagees from "./pages/Messages";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import Register from "./pages/Register";
@@ -23,23 +25,17 @@ function App() {
 
   return (
     <div className="App">
-      <Box bgcolor={"background.default"} color="text.primary">
+      <Box bgcolor={grey[200]} color="text.primary" sx={{ height: "100vh" }}>
         {authorized ? (
           <Router>
             <Navbar />
             <Container>
-              <Grid container spacing={3}>
-                <Grid item sm={4}>
-                  <Leftbar />
-                </Grid>
-                <Grid item sm={8} xs={12}>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/profile/edit" element={<ProfileEdit />} />
-                  </Routes>
-                </Grid>
-              </Grid>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/messages" element={<Messagees />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/edit" element={<ProfileEdit />} />
+              </Routes>
             </Container>
           </Router>
         ) : (
