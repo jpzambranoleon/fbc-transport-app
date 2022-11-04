@@ -1,8 +1,12 @@
+import { Send } from "@mui/icons-material";
 import {
   Avatar,
   Box,
+  Button,
   Divider,
   Grid,
+  IconButton,
+  InputBase,
   List,
   ListItem,
   ListItemAvatar,
@@ -19,21 +23,11 @@ export default function Messagees() {
 
   return (
     <main>
-      <Grid
-        container
-        component={Box}
-        sx={{ mt: 2, border: 1, borderRadius: 2, height: 650 }}
-      >
+      <Grid container component={Box} sx={{ mt: 2 }}>
         <Grid item sm={4}>
           <Box
             bgcolor={"background.paper"}
-            borderRadius={2}
-            sx={{
-              height: "100%",
-              borderTopRightRadius: 0,
-              borderBottomRightRadius: 0,
-              borderRight: 1,
-            }}
+            sx={{ height: 650, maxHeight: 650, border: 1, borderRadius: 2 }}
           >
             <Typography variant="h6" align="center">
               Chats
@@ -56,10 +50,11 @@ export default function Messagees() {
         <Grid item sm={8}>
           <Box
             bgcolor={"background.paper"}
-            borderRadius={2}
             sx={{
+              border: 1,
               borderTopLeftRadius: 0,
               borderBottomLeftRadius: 0,
+              borderRadius: 2,
               height: "100%",
             }}
           >
@@ -74,13 +69,57 @@ export default function Messagees() {
                 display: "flex",
                 flexGrow: 1,
                 flexDirection: "column",
-                height: 583,
+                height: "100%",
+                maxHeight: 541,
               }}
             >
               <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
+              <Typography>Messages</Typography>
             </Box>
-            <Box sx={{ bgcolor: "red", flexGrow: 1 }}>
-              <TextField variant="standard" />
+            <Box
+              sx={{
+                bgcolor: "red",
+                position: "fixed",
+                display: "flex",
+                width: 734,
+                padding: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flex: 1,
+                  border: 1,
+                  borderRadius: 7,
+                  padding: 0.5,
+                }}
+              >
+                <InputBase sx={{ flex: 1 }} placeholder="Message" />
+                <Button>Send</Button>
+              </Box>
             </Box>
           </Box>
         </Grid>
