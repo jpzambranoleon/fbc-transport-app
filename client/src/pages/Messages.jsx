@@ -119,6 +119,7 @@ export default function Messagees() {
               >
                 <InputBase sx={{ flex: 1 }} placeholder="Message" />
                 <Button>Send</Button>
+                <Avatar />
                 <TextField />
               </Box>
             </Box>
