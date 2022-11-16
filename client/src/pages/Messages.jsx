@@ -117,7 +117,6 @@ export default function Messagees() {
                   padding: 0.5,
                 }}
               >
-                <InputBase sx={{ flex: 1 }} placeholder="Message" />
                 <Button>Send</Button>
                 <Avatar />
                 <TextField />
