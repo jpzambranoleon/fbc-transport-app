@@ -118,7 +118,7 @@ export default function Messagees() {
                 }}
               >
                 <Button>Send</Button>
-                <Avatar />
+                <Avatar src="" />
                 <TextField />
               </Box>
             </Box>
