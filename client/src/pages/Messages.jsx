@@ -20,6 +20,7 @@ import { InfoContext } from "../utility/InfoProvider";
 
 export default function Messagees() {
   const { authorized } = useContext(InfoContext);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER_IMAGES_PERSON;
 
   return (
     <main>
