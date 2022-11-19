@@ -119,7 +119,13 @@ export default function Messagees() {
                 }}
               >
                 <Button>Send</Button>
-                <Avatar src="" />
+                <Avatar
+                  src={
+                    !user.profilePic
+                      ? "/broken-image.jpg"
+                      : PF + user.profilePic
+                  }
+                />
                 <TextField />
               </Box>
             </Box>
