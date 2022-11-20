@@ -126,7 +126,7 @@ export default function Messagees() {
                       : PF + user.profilePic
                   }
                 />
-                <TextField />
+                <TextField fullWidth />
               </Box>
             </Box>
           </Box>
