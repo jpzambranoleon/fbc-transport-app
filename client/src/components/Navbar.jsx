@@ -51,7 +51,7 @@ const Navbar = () => {
             color="primary"
             sx={{ flexGrow: 1 }}
           >
-            IFO Transport App
+            App
           </Typography>
           <IconButton size="large">
             <HomeOutlined color="primary" />
