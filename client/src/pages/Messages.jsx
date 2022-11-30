@@ -15,11 +15,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { InfoContext } from "../utility/InfoProvider";
 
-export default function Messagees() {
+export default function Messages() {
   const { authorized } = useContext(InfoContext);
+  const userId = localStorage.getItem("user");
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER_IMAGES_PERSON;
 
   return (
@@ -71,7 +74,8 @@ export default function Messagees() {
                 flexGrow: 1,
                 flexDirection: "column",
                 height: "100%",
-                maxHeight: 541,
+                height: 546,
+                maxHeight: 546,
               }}
             >
               <Typography>Messages</Typography>
@@ -101,34 +105,22 @@ export default function Messagees() {
               <Typography>Messages</Typography>
               <Typography>Messages</Typography>
             </Box>
+            <Divider />
             <Box
               sx={{
                 bgcolor: "red",
                 position: "fixed",
                 display: "flex",
-                width: 734,
                 padding: 2,
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  flex: 1,
-                  border: 1,
-                  borderRadius: 7,
-                  padding: 0.5,
-                }}
-              >
-                <Button>Send</Button>
-                <Avatar
-                  src={
-                    !user.profilePic
-                      ? "/broken-image.jpg"
-                      : PF + user.profilePic
-                  }
-                />
-                <TextField fullWidth />
-              </Box>
+              <Avatar
+                src={
+                  !user.profilePic ? "/broken-image.jpg" : PF + user.profilePic
+                }
+              />
+              <TextField size="small" fullWidth />
+              <Button>send</Button>
             </Box>
           </Box>
         </Grid>
