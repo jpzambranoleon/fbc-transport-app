@@ -14,7 +14,6 @@ import ChatRoom from "./pages/ChatRoom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Messages from "./pages/Messages";
-import Messages2 from "./pages/Messages2";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import Register from "./pages/Register";
