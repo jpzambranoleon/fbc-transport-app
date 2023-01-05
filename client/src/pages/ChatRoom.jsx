@@ -14,8 +14,25 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function ChatRoom() {
+  const [conversations, setConversations] = useState([]);
+  const userId = localStorage.getItem("user");
+
+  useEffect(() => {
+    const getConversations = async () => {
+      try {
+        const res = await axios.get("/conversations" + userId);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  }, [userId]);
+
   return (
     <div>
       <Grid
@@ -78,7 +95,7 @@ export default function ChatRoom() {
           </List>
         </Grid>
         <Grid item xs={9}>
-          <List sx={{ height: "65vh", overflowY: "auto" }}>
+          <List sx={{ height: "67vh", overflowY: "auto" }}>
             <ListItem key="1">
               <Grid container>
                 <Grid item xs={12}>
@@ -202,13 +219,14 @@ export default function ChatRoom() {
             <Grid item xs={11}>
               <TextField
                 id="outlined-basic-email"
+                size="small"
                 variant="standard"
                 label="Type Something"
                 fullWidth
               />
             </Grid>
-            <Grid xs={1} align="right">
-              <Fab color="primary" aria-label="add">
+            <Grid item xs={1} align="right">
+              <Fab size="small" color="primary" aria-label="add">
                 <Send />
               </Fab>
             </Grid>
