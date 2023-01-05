@@ -4,6 +4,8 @@ import {
   Box,
   Button,
   IconButton,
+  Menu,
+  MenuItem,
   Skeleton,
   Toolbar,
   Typography,
@@ -16,6 +18,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { ChatBubbleOutline, HomeOutlined } from "@mui/icons-material";
 
+const settings = ["Logout"];
+
 const Navbar = () => {
   const { authorized } = useContext(InfoContext);
   const userId = localStorage.getItem("user");
@@ -23,6 +27,28 @@ const Navbar = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const PF = process.env.REACT_APP_PUBLIC_FOLDER_IMAGES_PERSON;
+
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const onContextMenuClick = (action) => {
+    setAnchorElUser(null);
+    if (action.toLowerCase() === "profile") {
+      console.log("profile");
+    } else if (action.toLowerCase() === "logout") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      navigate("/");
+      window.location.reload();
+    }
+  };
 
   useEffect(() => {
     if (authorized) {
@@ -59,7 +85,7 @@ const Navbar = () => {
           <IconButton size="large">
             <ChatBubbleOutline color="primary" />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleOpenUserMenu}>
             {loading ? (
               <Skeleton variant="circular" width={35} height={35} />
             ) : (
@@ -71,6 +97,28 @@ const Navbar = () => {
               />
             )}
           </IconButton>
+          <Menu
+            sx={{ mt: "45px" }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem
+                key={setting}
+                onClick={() => onContextMenuClick(setting)}
+              >
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
         </Toolbar>
       </AppBar>
     </Box>
