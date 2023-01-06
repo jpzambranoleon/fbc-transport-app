@@ -1,14 +1,13 @@
 const Conversation = require("../models/conversation.model");
-const router = require("../routes/auth.routes");
 
 // New conversation
 exports.newConversation = async (req, res) => {
-  let newConvo = new Conversation({
+  let newCon = new Conversation({
     members: [req.body.senderId, req.body.receiverId],
   });
 
   try {
-    let savedConversation = await newConvo.save();
+    let savedConversation = await newCon.save();
     res.status(200).json(savedConversation);
   } catch (err) {
     res.status(500).json({
