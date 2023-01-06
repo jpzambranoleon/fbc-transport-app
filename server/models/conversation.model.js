@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const conversationSchema = new Schema(
   {
-    member: {
+    members: {
       type: Array,
     },
   },
