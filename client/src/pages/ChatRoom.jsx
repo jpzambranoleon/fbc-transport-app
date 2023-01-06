@@ -15,22 +15,27 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
+import { InfoContext } from "../utility/InfoProvider";
 
 export default function ChatRoom() {
+  const { authorizedUser } = useContext(InfoContext);
   const [conversations, setConversations] = useState([]);
   const userId = localStorage.getItem("user");
+
+  console.log(authorizedUser);
 
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/conversations" + userId);
-        console.log(res);
+        const res = await axios.get("/conversations/" + userId);
+        setConversations(res.data);
       } catch (err) {
         console.log(err);
       }
     };
+    getConversations();
   }, [userId]);
 
   return (
