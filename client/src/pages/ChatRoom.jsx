@@ -17,6 +17,7 @@ import {
 import axios from "axios";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
+import Conversation from "../components/Conversation";
 import { InfoContext } from "../utility/InfoProvider";
 
 export default function ChatRoom() {
@@ -67,6 +68,9 @@ export default function ChatRoom() {
             />
           </Grid>
           <List>
+            <ListItemButton>
+              <Conversation />
+            </ListItemButton>
             <ListItemButton>
               <ListItemIcon>
                 <Avatar
