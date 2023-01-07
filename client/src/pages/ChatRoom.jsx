@@ -6,7 +6,6 @@ import {
   Fab,
   Grid,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -26,6 +25,7 @@ export default function ChatRoom() {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
   const userId = localStorage.getItem("user");
 
   useEffect(() => {
@@ -51,6 +51,23 @@ export default function ChatRoom() {
     };
     getMessages();
   }, [currentChat]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const message = {
+      sender: authorizedUser._id,
+      text: newMessage,
+      conversationId: currentChat._id,
+    };
+
+    try {
+      const res = await axios.post("/messages", message);
+      setMessages([...messages, res.data]);
+      setNewMessage("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -107,10 +124,17 @@ export default function ChatRoom() {
                 variant="standard"
                 label="Type Something"
                 fullWidth
+                onChange={(e) => setNewMessage(e.target.value)}
+                value={newMessage}
               />
             </Grid>
             <Grid item xs={1} align="right">
-              <Fab size="small" color="primary" aria-label="add">
+              <Fab
+                size="small"
+                color="primary"
+                aria-label="add"
+                onClick={handleSubmit}
+              >
                 <Send />
               </Fab>
             </Grid>
