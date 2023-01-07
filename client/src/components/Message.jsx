@@ -1,34 +1,38 @@
 import { Grid, ListItem, ListItemText } from "@mui/material";
+import { format } from "timeago.js";
 
 const Message = ({ message, own }) => {
   return (
     <>
-      <ListItem key="1">
-        <Grid container>
-          <Grid item xs={12}>
-            <ListItemText align="right" primary={message.text}></ListItemText>
+      {own ? (
+        <ListItem key={message._id}>
+          <Grid container>
+            <Grid item xs={12}>
+              <ListItemText align="right" primary={message.text}></ListItemText>
+            </Grid>
+            <Grid item xs={12}>
+              <ListItemText
+                align="right"
+                secondary={format(message.createdAt)}
+              ></ListItemText>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <ListItemText
-              align="right"
-              secondary={message.createdAt}
-            ></ListItemText>
+        </ListItem>
+      ) : (
+        <ListItem key={message._id}>
+          <Grid container>
+            <Grid item xs={12}>
+              <ListItemText align="left" primary={message.text}></ListItemText>
+            </Grid>
+            <Grid item xs={12}>
+              <ListItemText
+                align="left"
+                secondary={format(message.createdAt)}
+              ></ListItemText>
+            </Grid>
           </Grid>
-        </Grid>
-      </ListItem>
-      <ListItem key="2">
-        <Grid container>
-          <Grid item xs={12}>
-            <ListItemText
-              align="left"
-              primary="Hey, Iam Good! What about you ?"
-            ></ListItemText>
-          </Grid>
-          <Grid item xs={12}>
-            <ListItemText align="left" secondary="09:31"></ListItemText>
-          </Grid>
-        </Grid>
-      </ListItem>
+        </ListItem>
+      )}
     </>
   );
 };
