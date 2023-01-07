@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+import { useRef } from "react";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
 import Conversation from "../components/Conversation";
@@ -26,6 +27,7 @@ export default function ChatRoom() {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const scrollRef = useRef();
   const userId = localStorage.getItem("user");
 
   useEffect(() => {
@@ -69,6 +71,10 @@ export default function ChatRoom() {
     }
   };
 
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <div>
       <Grid
@@ -109,7 +115,9 @@ export default function ChatRoom() {
           {currentChat ? (
             <List sx={{ height: "67vh", overflowY: "auto" }}>
               {messages.map((m) => (
-                <Message message={m} own={m.sender === authorizedUser._id} />
+                <div ref={scrollRef}>
+                  <Message message={m} own={m.sender === authorizedUser._id} />
+                </div>
               ))}
             </List>
           ) : (
