@@ -12,7 +12,6 @@ import {
   ListItemText,
   Paper,
   TextField,
-  Typography,
 } from "@mui/material";
 import axios from "axios";
 import { useContext, useEffect } from "react";
@@ -23,9 +22,9 @@ import { InfoContext } from "../utility/InfoProvider";
 export default function ChatRoom() {
   const { authorizedUser } = useContext(InfoContext);
   const [conversations, setConversations] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
+  const [messages, setMessages] = useState([]);
   const userId = localStorage.getItem("user");
-
-  console.log(authorizedUser);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -68,39 +67,9 @@ export default function ChatRoom() {
             />
           </Grid>
           <List>
-            <ListItemButton>
-              <Conversation />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemIcon>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://material-ui.com/static/images/avatar/1.jpg"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Remy Sharp" />
-              <ListItemText secondary="online" align="right" />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemIcon>
-                <Avatar
-                  alt="Alice"
-                  src="https://material-ui.com/static/images/avatar/3.jpg"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Alice" />
-              <ListItemText secondary="online" align="right" />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemIcon>
-                <Avatar
-                  alt="Cindy Baker"
-                  src="https://material-ui.com/static/images/avatar/2.jpg"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Cindy Baker" />
-              <ListItemText secondary="online" align="right" />
-            </ListItemButton>
+            {conversations.map((c) => (
+              <Conversation conversation={c} currentUser={authorizedUser} />
+            ))}
           </List>
         </Grid>
         <Grid item xs={9}>
