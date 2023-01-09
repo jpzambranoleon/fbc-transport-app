@@ -7,10 +7,5 @@ const io = require("socket.io")(4400, {
 io.on("connection", (socket) => {
   // when connect
   console.log("a user connected.");
-
-  // take useId and socketId from user
-  socket.on("addUser", (userId) => {
-    addUser(userId, socket.id);
-    io.emit("getUsers", users);
-  });
+  io.emit("welcome", "hello this is socket server!");
 });
