@@ -27,8 +27,13 @@ export default function ChatRoom() {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [socket, setSocket] = useState(null);
   const scrollRef = useRef();
   const userId = localStorage.getItem("user");
+
+  useEffect(() => {
+    setSocket(io("ws://localhost:4400"));
+  }, []);
 
   useEffect(() => {
     const getConversations = async () => {
