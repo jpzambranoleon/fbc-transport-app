@@ -29,6 +29,7 @@ export default function ChatRoom() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
   const scrollRef = useRef();
   const userId = localStorage.getItem("user");
@@ -53,7 +54,7 @@ export default function ChatRoom() {
   useEffect(() => {
     socket.current.emit("addUser", userId);
     socket.current.on("getUsers", (users) => {
-      console.log(users);
+      setOnlineUsers(users);
     });
   }, [userId]);
 
