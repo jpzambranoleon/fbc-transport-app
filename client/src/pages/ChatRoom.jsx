@@ -20,6 +20,7 @@ import { useState } from "react";
 import Conversation from "../components/Conversation";
 import Message from "../components/Message";
 import { InfoContext } from "../utility/InfoProvider";
+import { io } from "socket.io-client";
 
 export default function ChatRoom() {
   const { authorizedUser } = useContext(InfoContext);
@@ -27,19 +28,34 @@ export default function ChatRoom() {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [socket, setSocket] = useState(null);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const socket = useRef();
   const scrollRef = useRef();
   const userId = localStorage.getItem("user");
 
   useEffect(() => {
-    setSocket(io("ws://localhost:4400"));
+    socket.current = io("ws://localhost:4500");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
   }, []);
 
   useEffect(() => {
-    socket?.on("welcome", (message) => {
-      console.log(message);
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
+
+  useEffect(() => {
+    socket.current.emit("addUser", userId);
+    socket.current.on("getUsers", (users) => {
+      console.log(users);
     });
-  }, [socket]);
+  }, [userId]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -68,10 +84,18 @@ export default function ChatRoom() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
-      sender: authorizedUser._id,
+      sender: userId,
       text: newMessage,
       conversationId: currentChat._id,
     };
+
+    const receiverId = currentChat.members.find((member) => member !== userId);
+
+    socket.current.emit("sendMessage", {
+      senderId: userId,
+      receiverId,
+      text: newMessage,
+    });
 
     try {
       const res = await axios.post("/messages", message);
@@ -127,7 +151,7 @@ export default function ChatRoom() {
             <List sx={{ height: "67vh", overflowY: "auto" }}>
               {messages.map((m) => (
                 <div ref={scrollRef}>
-                  <Message message={m} own={m.sender === authorizedUser._id} />
+                  <Message message={m} own={m.sender === userId} />
                 </div>
               ))}
             </List>
