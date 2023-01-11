@@ -75,8 +75,11 @@ export default function Register() {
             alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="h5" color="primary">
-            Create an Account
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlined />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Create your account
           </Typography>
           <Box
             component="form"
